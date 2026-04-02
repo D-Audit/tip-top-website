@@ -393,6 +393,7 @@ body{font-family:var(--fb);background:var(--cream);color:var(--td);overflow-x:hi
   /* 2-card slider on tablet */
   .card-slide{flex:0 0 calc((100% - 20px) / 2)}
 }
+
 @media(max-width:600px){
   .footer-top{grid-template-columns:1fr}
   .about-values{grid-template-columns:1fr}
