@@ -305,6 +305,7 @@ document.querySelector('.btn-form').addEventListener('click', function () {
       inp.style.borderColor = '';
       inp.style.background  = '';
     }
+    
   });
   if (valid) {
     this.textContent = '✓ Message Sent!';
@@ -315,4 +316,5 @@ document.querySelector('.btn-form').addEventListener('click', function () {
       this.style.background = '';
     }, 3000);
   }
+
 });
