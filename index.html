@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tip Top Consultancy – Empowering Children's Futures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <img class="lightbox-img" id="lbImg" src="" alt="Gallery image"/>
+  <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next">›</button>
+  <div class="lightbox-counter" id="lbCounter"></div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a class="nav-brand" href="#home">
+    <div class="nav-logo-wrap">
+      <img src="https://res.cloudinary.com/nrob/image/upload/v1685521829/tip%20top%20consultancy/zmyn7wtr7yauhd8f1bow.jpg" alt="Tip Top Consultancy Logo"/>
+    </div>
+    <div>
+      <div class="nav-brand-name">Tip Top Consultancy</div>
+      <span class="nav-brand-sub">Empowering Children's Futures</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery-books">Books</a></li>
+    <li><a href="#gallery-toys">Toys</a></li>
+    <li><a href="#gallery-charts">Charts</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home">Home</a>
+  <a href="#about">About Us</a>
+  <a href="#services">Our Services</a>
+  <a href="#gallery-books">Educational Books</a>
+  <a href="#gallery-toys">Learning Toys</a>
+  <a href="#gallery-charts">Charts &amp; Flashcards</a>
+  <a href="#consultancy">Consultancy</a>
+  <a href="#contact">Contact Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-pattern"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Educational Excellence Since 2020
+      </div>
+      <h1 class="hero-title">
+        Shaping Bright<br/>
+        Minds Across <em>Africa</em>
+        <span class="line2">One Child at a Time</span>
+      </h1>
+      <p class="hero-desc">
+        Tip Top Consultancy creates educational products and services that help children develop mental, social-emotional, and motor skills. Our child-friendly workbooks, readers, toys, and consultancy services are designed to provide unparalleled learning outcomes to children and families.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Explore Our Products →</a>
+        <a href="#contact" class="btn-outline">Contact Us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">4+</div>
+          <div class="stat-label">Product Lines</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Countries</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Child-Friendly</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">ECD</div>
+          <div class="stat-label">Curriculum-Aligned</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-mosaic">
+        <div class="hero-mosaic-item" data-src="https://res.cloudinary.com/nrob/image/upload/v1685181320/tip%20top%20consultancy/books/rvys1wx2kkfhpd4tkihe.png">
+          <img src="https://res.cloudinary.com/nrob/image/upload/v1685181320/tip%20top%20consultancy/books/rvys1wx2kkfhpd4tkihe.png" alt="Educational Book" loading="eager"/>
+        </div>
+        <div class="hero-mosaic-item" data-src="https://res.cloudinary.com/nrob/image/upload/v1685186676/tip%20top%20consultancy/toys/t78ldaralz1fa2epsjgy.jpg">
+          <img src="https://res.cloudinary.com/nrob/image/upload/v1685186676/tip%20top%20consultancy/toys/t78ldaralz1fa2epsjgy.jpg" alt="Learning Toy" loading="eager"/>
+        </div>
+        <div class="hero-mosaic-item" data-src="https://res.cloudinary.com/nrob/image/upload/v1685442504/tip%20top%20consultancy/charts/okpsomvbtfusxukiizua.jpg">
+          <img src="https://res.cloudinary.com/nrob/image/upload/v1685442504/tip%20top%20consultancy/charts/okpsomvbtfusxukiizua.jpg" alt="Wall Chart" loading="eager"/>
+        </div>
+        <div class="hero-mosaic-item" data-src="https://res.cloudinary.com/nrob/image/upload/v1685181319/tip%20top%20consultancy/books/ftvb6mp5kpweg12ryky6.png">
+          <img src="https://res.cloudinary.com/nrob/image/upload/v1685181319/tip%20top%20consultancy/books/ftvb6mp5kpweg12ryky6.png" alt="Educational Book" loading="eager"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><span class="trust-icon">🇷🇼</span> Rwanda</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-icon">🇺🇬</span> Uganda</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-icon">📚</span> ECD Curriculum-Aligned</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-icon">🧸</span> Learn for Change</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-icon">🏫</span> Schools &amp; NGOs</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section about-bg" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-up">
+        <img class="about-img-main"
+          src="https://res.cloudinary.com/nrob/image/upload/v1685187122/tip%20top%20consultancy/services/a1ob6vhsfiyrfxk6lrmh.jpg"
+          alt="Tip Top Consultancy team in action"/>
+        <div class="about-accent-card">
+          <div class="big">2020</div>
+          <div class="small">Founded in East Africa</div>
+        </div>
+        <div class="about-pill">🌍 Rwanda &amp; Uganda</div>
+      </div>
+      <div class="about-body fade-up">
+        <div class="tag">Who We Are</div>
+        <h2 class="section-title">Dedicated to Children's Growth &amp; Development</h2>
+        <p class="section-desc">
+          Tip Top Consultancy is an educational products and services company operating across Rwanda and Uganda. We are passionate about empowering children with tools they need to thrive emotionally, intellectually, and socially.
+        </p>
+        <p class="section-desc" style="margin-top:12px">
+          Our exciting child-friendly workbooks, readers, toys, and consultancy services are carefully designed to align with African ECD and pre-school national curricula — delivering unparalleled learning experiences to children and their families.
+        </p>
+        <div class="about-values">
+          <div class="value-item">
+            <div class="value-icon">📚</div>
+            <div class="value-text">
+              <strong>Curriculum-Aligned</strong>
+              <p>Tailored to ECD and pre-school syllabi across Africa.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🧠</div>
+            <div class="value-text">
+              <strong>Holistic Learning</strong>
+              <p>Mental, social-emotional and motor skill development.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🎨</div>
+            <div class="value-text">
+              <strong>Creative &amp; Engaging</strong>
+              <p>Fun, interactive materials children genuinely love.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🤝</div>
+            <div class="value-text">
+              <strong>Family-Centered</strong>
+              <p>Supporting parents, caregivers and teachers together.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-bg" id="services">
+  <div class="section-inner">
+    <div class="section-header center fade-up">
+      <div class="tag">What We Offer</div>
+      <h2 class="section-title">Our Products &amp; Services</h2>
+      <p class="section-desc">Everything a child needs to learn, grow, and flourish — designed by education experts and loved by children across Africa.</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card fade-up">
+        <div class="product-card-top"></div>
+        <div class="product-card-body">
+          <div class="product-emoji-wrap">📗</div>
+          <h3>Educational Books</h3>
+          <p>Our workbooks and readers align with ECD and pre-school syllabi, covering health activities, social skills, numeracy, and cognitive development. Designed to make reading fun and effective for every child.</p>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card-top orange"></div>
+        <div class="product-card-body">
+          <div class="product-emoji-wrap" style="background:var(--orange-pale);border-color:var(--orange-light)">🧸</div>
+          <h3>Learning Toys</h3>
+          <p>Research-backed toys that make learning through play natural. Our toys stimulate curiosity, reduce school dropout rates, and help children discover who they are through healthy, engaging play.</p>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card-top teal"></div>
+        <div class="product-card-body">
+          <div class="product-emoji-wrap" style="background:#e8f6f3;border-color:#b8e8da">🗂️</div>
+          <h3>Charts &amp; Flashcards</h3>
+          <p>Colorful, visually engaging wall charts and flashcards that help children memorize vocabulary effortlessly. Perfect for classroom and home use, enabling caregivers to create fun learning games.</p>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card-top purple"></div>
+        <div class="product-card-body">
+          <div class="product-emoji-wrap" style="background:#f0edf8;border-color:#d4c8ed">🏫</div>
+          <h3>Consultancy Services</h3>
+          <p>Expert training and custom manuals for caregivers and parents on positive parenting, child protection, social inclusion, and gender-sensitive education — enriching the "Learn for Change" vision.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKS GALLERY -->
+<section class="gallery-section" id="gallery-books">
+  <div class="gallery-inner">
+    <div class="gallery-header fade-up">
+      <div>
+        <div class="tag">Our Collection</div>
+        <h2 class="section-title" style="margin-bottom:0">Educational Books</h2>
+        <p class="gallery-count">Covering ECD syllabus across multiple African curricula</p>
+      </div>
+    </div>
+    <div class="gallery-grid" id="books-grid">
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685181320/tip%20top%20consultancy/books/rvys1wx2kkfhpd4tkihe.png" alt="Educational Book" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685181319/tip%20top%20consultancy/books/ftvb6mp5kpweg12ryky6.png" alt="Educational Book" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685181319/tip%20top%20consultancy/books/dbvgu6tjw8wcuavwlauq.png" alt="Educational Book" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685181318/tip%20top%20consultancy/books/rcb2ph1xemdfa4cb8fve.png" alt="Educational Book" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685181318/tip%20top%20consultancy/books/u1to9rslqr6dfrheoatk.png" alt="Educational Book" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685181319/tip%20top%20consultancy/books/cdmie2urpyzjh9b4lblq.png" alt="Educational Book" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685181318/tip%20top%20consultancy/books/c7e9fm8v5jlr22kbdmjp.png" alt="Educational Book" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TOYS GALLERY -->
+<section class="gallery-section alt" id="gallery-toys">
+  <div class="gallery-inner">
+    <div class="gallery-header fade-up">
+      <div>
+        <div class="tag orange">Play &amp; Learn</div>
+        <h2 class="section-title" style="margin-bottom:0">Learning Toys</h2>
+        <p class="gallery-count">Stimulating cognitive and emotional growth through play</p>
+      </div>
+    </div>
+    <div class="gallery-grid" id="toys-grid">
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186676/tip%20top%20consultancy/toys/t78ldaralz1fa2epsjgy.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186676/tip%20top%20consultancy/toys/qyn3mf5iutez472ssaeo.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186677/tip%20top%20consultancy/toys/e4f0pzl16awjnawbuwhh.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186676/tip%20top%20consultancy/toys/eayu9dyz5bhxuddlw5vg.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186676/tip%20top%20consultancy/toys/klt6dzpdlar62vd44tw8.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186677/tip%20top%20consultancy/toys/ioinnojfnlz4suqa8eta.webp" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186679/tip%20top%20consultancy/toys/oq2hvmbma0qsqq9yi3mq.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186676/tip%20top%20consultancy/toys/iqakmn9gwlryi7khbqgx.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186676/tip%20top%20consultancy/toys/iph239e4ijt4j4gv5qvb.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186678/tip%20top%20consultancy/toys/yjwmhyiowotbtgxbfoqk.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186676/tip%20top%20consultancy/toys/fkuibm4qyvxoy4t1r5q0.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186677/tip%20top%20consultancy/toys/xcxfakmfswbrkmsikioi.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186677/tip%20top%20consultancy/toys/dmqdcawu4laes85j1pdw.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685186678/tip%20top%20consultancy/toys/iywlq0alz4eg8oog7bkh.jpg" alt="Learning Toy" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS GALLERY -->
+<section class="gallery-section" id="gallery-charts">
+  <div class="gallery-inner">
+    <div class="gallery-header fade-up">
+      <div>
+        <div class="tag">Visual Learning</div>
+        <h2 class="section-title" style="margin-bottom:0">Charts &amp; Flashcards</h2>
+        <p class="gallery-count">Colorful, memory-boosting visual learning tools</p>
+      </div>
+    </div>
+    <div class="gallery-grid" id="charts-grid">
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685442504/tip%20top%20consultancy/charts/okpsomvbtfusxukiizua.jpg" alt="Wall Chart" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685442503/tip%20top%20consultancy/charts/u3pxexlhciuws4bl4w8l.jpg" alt="Flashcard" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685442504/tip%20top%20consultancy/charts/iru7ewnnvvnciymkwz6z.jpg" alt="Wall Chart" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685442504/tip%20top%20consultancy/charts/pp3efjq7jmvoyrxfupqv.jpg" alt="Wall Chart" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+      <div class="gallery-item fade-up"><img src="https://res.cloudinary.com/nrob/image/upload/v1685442503/tip%20top%20consultancy/charts/tj3cdqve1zeechfe2h3e.jpg" alt="Flashcard" loading="lazy"/><div class="gallery-item-overlay"><span class="overlay-zoom">View full</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSULTANCY -->
+<section class="section consult-bg" id="consultancy">
+  <div class="consult-inner">
+    <div class="fade-up">
+      <div class="tag">Expert Guidance</div>
+      <h2 class="section-title">Consultancy Services</h2>
+      <p class="section-desc">
+        Our consultancy program enriches the "Learn for Change" initiative by empowering the adults in a child's life — parents, caregivers, and teachers alike.
+      </p>
+      <ul class="consult-list">
+        <li>Positive parenting training and interactive workshops</li>
+        <li>Child protection frameworks and community awareness</li>
+        <li>Social inclusion and diversity-sensitive education</li>
+        <li>Gender-sensitive curriculum guidance for educators</li>
+        <li>Custom manuals and reference materials for schools</li>
+        <li>Institutional capacity building for NGOs and schools</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="margin-top:36px;display:inline-flex">Request a Consultation →</a>
+    </div>
+    <div class="consult-gallery fade-up">
+      <img src="https://res.cloudinary.com/nrob/image/upload/v1685187122/tip%20top%20consultancy/services/a1ob6vhsfiyrfxk6lrmh.jpg" alt="Consultancy session"/>
+      <img src="https://res.cloudinary.com/nrob/image/upload/v1685187123/tip%20top%20consultancy/services/b4um7t7djzaa2jmlsv4b.jpg" alt="Workshop"/>
+      <img src="https://res.cloudinary.com/nrob/image/upload/v1685187122/tip%20top%20consultancy/services/yozgee8n2wncnlojvsil.jpg" alt="Training"/>
+      <img src="https://res.cloudinary.com/nrob/image/upload/v1685187122/tip%20top%20consultancy/services/myvedcfcjmn5r4pd5wv4.jpg" alt="Education session"/>
+      <img src="https://res.cloudinary.com/nrob/image/upload/v1685187122/tip%20top%20consultancy/services/qdw4hfb5ya2u1abafnwy.jpg" alt="Community training"/>
+      <img src="https://res.cloudinary.com/nrob/image/upload/v1685187122/tip%20top%20consultancy/services/ungxoxjexw3eufgh44rr.jpg" alt="Workshop"/>
+    </div>
+  </div>
+</section>
+<!-- BRAND / LOGO SECTION -->
+<section class="brand-section fade-up">
+  <img class="brand-logo-big"
+    src="https://res.cloudinary.com/nrob/image/upload/v1685521829/tip%20top%20consultancy/zmyn7wtr7yauhd8f1bow.jpg"
+    alt="Tip Top Consultancy Logo"/>
+  <div class="brand-name-big">Tip Top Consultancy</div>
+  <p class="brand-tagline">Empowering Children's Futures across Africa — one family, one school, one community at a time.</p>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-bg" id="contact">
+  <div class="section-inner">
+    <div class="section-header center fade-up">
+      <div class="tag">Get In Touch</div>
+      <h2 class="section-title">We'd Love to Hear from You</h2>
+      <p class="section-desc">Reach out to our offices in Rwanda or Uganda to learn more about our products, request a consultation, or place an order.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="fade-up">
+        <!-- Rwanda -->
+        <div class="contact-card">
+          <h3>🇷🇼 Kigali, Rwanda</h3>
+          <span class="sub">East Africa Office</span>
+          <div class="contact-row">
+            <div class="contact-icon">📍</div>
+            <div class="contact-info"><strong>Address</strong><span>Kimironko Road, Opposite REB (NCDC), Kigali</span></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📞</div>
+            <div class="contact-info"><strong>Phone</strong><span>+250 785 486 343 &nbsp;/&nbsp; +256 706 438 476</span></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📱</div>
+            <div class="contact-info"><strong>WhatsApp</strong><span>+250 788 252 005</span></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-info"><strong>Email</strong><span>tiptopconsultancy2@gmail.com</span></div>
+          </div>
+        </div>
+        <!-- Uganda -->
+        <div class="contact-card" style="margin-top:0">
+          <h3>🇺🇬 Entebbe, Uganda</h3>
+          <span class="sub">Main Office</span>
+          <div class="contact-row">
+            <div class="contact-icon">📍</div>
+            <div class="contact-info"><strong>Address</strong><span>Entebbe Road – Katabi, Opposite Air Force Barracks</span></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📞</div>
+            <div class="contact-info"><strong>Phone</strong><span>+256 706 438 476 &nbsp;/&nbsp; +250 785 486 343</span></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-info"><strong>Email</strong><span>tiptopconsultancy2@gmail.com</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-card fade-up">
+        <h3>Send Us a Message</h3>
+        <p class="form-sub">We respond within 24 hours. Fill in the form and we'll get back to you.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="e.g. Isabelle"/>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="e.g. Cadeau"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="yourname@email.com"/>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="e.g. Product inquiry / Consultancy request"/>
+        </div>
+        <div class="form-group">
+          <label>Country</label>
+          <input type="text" placeholder="Rwanda / Uganda / Other"/>
+        </div>
+        <div class="form-group">
+          <label>Your Message</label>
+          <textarea placeholder="Tell us what you need — products, consultation, order, or partnership…"></textarea>
+        </div>
+        <button class="btn-form">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <img class="footer-logo"
+          src="https://res.cloudinary.com/nrob/image/upload/v1685521829/tip%20top%20consultancy/zmyn7wtr7yauhd8f1bow.jpg"
+          alt="Tip Top Consultancy"/>
+        <div class="footer-brand-name">Tip Top Consultancy</div>
+        <p class="footer-brand-desc">Empowering children across Africa through quality educational products, learning tools, and expert consultancy services since 2020.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/groups/1855516344772249/?ref=share" class="social-link" target="_blank" title="Facebook">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@tiptopbooks1400" class="social-link" target="_blank" title="YouTube">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+          <a href="mailto:tiptopconsultancy2@gmail.com" class="social-link" title="Email">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#gallery-books">Our Books</a></li>
+          <li><a href="#gallery-toys">Our Toys</a></li>
+          <li><a href="#gallery-charts">Charts &amp; Flashcards</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#gallery-books">Educational Books</a></li>
+          <li><a href="#gallery-toys">Learning Toys</a></li>
+          <li><a href="#gallery-charts">Wall Charts</a></li>
+          <li><a href="#gallery-charts">Flashcards</a></li>
+          <li><a href="#consultancy">Consultancy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <strong>Rwanda</strong>
+          <span>+250 785 486 343<br/>+250 788 252 005</span>
+        </div>
+        <div class="footer-contact-item">
+          <strong>Uganda</strong>
+          <span>+256 706 438 476</span>
+        </div>
+        <div class="footer-contact-item">
+          <strong>Email</strong>
+          <span>tiptopconsultancy2@gmail.com</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Tip Top Consultancy. All rights reserved.</p>
+      <p class="footer-copy">Empowering children's futures across Africa 🌍</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
