@@ -1,3 +1,7 @@
+// ── WHATSAPP NUMBERS ──
+const WA_RWANDA = '250788252005';
+const WA_UGANDA = '256706438476';
+
 // ── MOBILE NAV ──
 const toggle = document.getElementById('navToggle');
 const mobileNav = document.getElementById('mobileNav');
@@ -31,16 +35,12 @@ const revObs = new IntersectionObserver((entries) => {
 document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
 
 // ── HERO CAROUSEL ──
-(function initHeroCarousel() {
+(function () {
   const track = document.getElementById('heroTrack');
-  const prevBtn = document.getElementById('heroPrev');
-  const nextBtn = document.getElementById('heroNext');
   const dotsContainer = document.getElementById('heroDots');
   if (!track) return;
-
   const slides = track.querySelectorAll('.hero-carousel-slide');
-  let current = 0;
-  let autoTimer = null;
+  let current = 0, autoTimer;
 
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
@@ -51,19 +51,16 @@ document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
   });
 
   function updateDots() {
-    dotsContainer.querySelectorAll('.dot').forEach((d, i) => {
-      d.classList.toggle('active', i === current);
-    });
+    dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
   }
-
-  function goTo(index) {
-    current = (index + slides.length) % slides.length;
+  function goTo(i) {
+    current = (i + slides.length) % slides.length;
     track.style.transform = `translateX(-${current * 100}%)`;
     updateDots();
   }
 
-  prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
-  nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+  document.getElementById('heroPrev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+  document.getElementById('heroNext').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
 
   let startX = 0;
   track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
@@ -74,22 +71,17 @@ document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
 
   function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 3000); }
   function resetAuto() { clearInterval(autoTimer); startAuto(); }
-
   startAuto();
-  const carousel = track.closest('.hero-carousel');
-  carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
-  carousel.addEventListener('mouseleave', startAuto);
+  const c = track.closest('.hero-carousel');
+  c.addEventListener('mouseenter', () => clearInterval(autoTimer));
+  c.addEventListener('mouseleave', startAuto);
 })();
 
 // ── LIGHTBOX ──
-const lightbox   = document.getElementById('lightbox');
-const lbImg      = document.getElementById('lbImg');
-const lbClose    = document.getElementById('lbClose');
-const lbPrev     = document.getElementById('lbPrev');
-const lbNext     = document.getElementById('lbNext');
-const lbCounter  = document.getElementById('lbCounter');
-let lbImages = [];
-let lbIndex  = 0;
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCounter = document.getElementById('lbCounter');
+let lbImages = [], lbIndex = 0;
 
 function openLightbox(src, imageList) {
   lbImages = imageList || [{ src, alt: '' }];
@@ -99,7 +91,6 @@ function openLightbox(src, imageList) {
   lightbox.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
-
 function showLbImage(idx) {
   if (idx < 0) idx = lbImages.length - 1;
   if (idx >= lbImages.length) idx = 0;
@@ -107,23 +98,18 @@ function showLbImage(idx) {
   lbImg.style.cssText = 'opacity:0;transform:scale(.94);transition:none';
   setTimeout(() => {
     lbImg.src = lbImages[idx].src;
-    lbImg.alt = lbImages[idx].alt || '';
-    lbImg.onload = () => {
-      lbImg.style.cssText = 'opacity:1;transform:scale(1);transition:opacity .35s,transform .35s';
-    };
+    lbImg.onload = () => { lbImg.style.cssText = 'opacity:1;transform:scale(1);transition:opacity .35s,transform .35s'; };
   }, 60);
   lbCounter.textContent = (idx + 1) + ' / ' + lbImages.length;
 }
-
 function closeLightbox() {
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
   setTimeout(() => { lbImg.src = ''; }, 300);
 }
-
-lbClose.addEventListener('click', closeLightbox);
-lbPrev.addEventListener('click', () => showLbImage(lbIndex - 1));
-lbNext.addEventListener('click', () => showLbImage(lbIndex + 1));
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', () => showLbImage(lbIndex - 1));
+document.getElementById('lbNext').addEventListener('click', () => showLbImage(lbIndex + 1));
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 document.addEventListener('keydown', e => {
   if (!lightbox.classList.contains('active')) return;
@@ -134,34 +120,28 @@ document.addEventListener('keydown', e => {
 
 // ── CARD SLIDER FACTORY ──
 function createCardSlider({ trackId, prevId, nextId, dotsId, barId, interval }) {
-  const track     = document.getElementById(trackId);
-  const prevBtn   = document.getElementById(prevId);
-  const nextBtn   = document.getElementById(nextId);
-  const dotsCont  = document.getElementById(dotsId);
-  const bar       = document.getElementById(barId);
+  const track = document.getElementById(trackId);
+  const prevBtn = document.getElementById(prevId);
+  const nextBtn = document.getElementById(nextId);
+  const dotsCont = document.getElementById(dotsId);
+  const bar = document.getElementById(barId);
   if (!track) return;
 
-  const slides   = Array.from(track.querySelectorAll('.card-slide'));
-  const total    = slides.length;
-  let current    = 0;   // index of leftmost visible card
-  let autoTimer  = null;
-  const GAP      = 20;  // must match CSS gap
+  const slides = Array.from(track.querySelectorAll('.card-slide'));
+  const total = slides.length;
+  let current = 0, autoTimer;
+  const GAP = 20;
 
-  /* ── how many cards fit right now ── */
   function perView() {
-    const w = window.innerWidth;
-    if (w <= 600) return 1;
-    if (w <= 960) return 2;
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 960) return 2;
     return 3;
   }
-
-  /* max starting index so last page is full */
   function maxIndex() { return Math.max(0, total - perView()); }
 
-  /* ── build dots (one per "page") ── */
   function buildDots() {
     dotsCont.innerHTML = '';
-    const pv    = perView();
+    const pv = perView();
     const pages = Math.ceil(total / pv);
     for (let i = 0; i < pages; i++) {
       const d = document.createElement('button');
@@ -173,23 +153,18 @@ function createCardSlider({ trackId, prevId, nextId, dotsId, barId, interval }) 
   }
 
   function syncDots() {
-    const pv   = perView();
+    const pv = perView();
     const page = Math.floor(current / pv);
-    dotsCont.querySelectorAll('.dot').forEach((d, i) => {
-      d.classList.toggle('active', i === page);
-    });
+    dotsCont.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === page));
   }
 
-  /* ── translate track so `current` card is at left edge ── */
   function render() {
-    // each card width = (viewport – gaps) / perView
     const viewport = track.parentElement.clientWidth;
-    const pv       = perView();
-    const cardW    = (viewport - GAP * (pv - 1)) / pv;
-    const offset   = current * (cardW + GAP);
+    const pv = perView();
+    const cardW = (viewport - GAP * (pv - 1)) / pv;
+    const offset = current * (cardW + GAP);
     track.style.transform = `translateX(-${offset}px)`;
     syncDots();
-    // show/hide buttons
     prevBtn.style.opacity = current === 0 ? '0.35' : '1';
     nextBtn.style.opacity = current >= maxIndex() ? '0.35' : '1';
   }
@@ -205,7 +180,6 @@ function createCardSlider({ trackId, prevId, nextId, dotsId, barId, interval }) 
   prevBtn.addEventListener('click', () => { prev(); resetAuto(); });
   nextBtn.addEventListener('click', () => { next(); resetAuto(); });
 
-  /* ── touch / swipe ── */
   let startX = 0;
   track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
   track.addEventListener('touchend', e => {
@@ -213,26 +187,29 @@ function createCardSlider({ trackId, prevId, nextId, dotsId, barId, interval }) 
     if (Math.abs(diff) > 44) { diff > 0 ? next() : prev(); resetAuto(); }
   });
 
-  /* ── keyboard ── */
+  // keyboard
   track.closest('.card-slider').setAttribute('tabindex', '0');
   track.closest('.card-slider').addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft') { prev(); resetAuto(); }
     if (e.key === 'ArrowRight') { next(); resetAuto(); }
   });
 
-  /* ── click card → lightbox ── */
+  // lightbox on image click (not on button click)
   const lbList = slides.map(s => ({
     src: s.dataset.src || s.querySelector('img')?.src || '',
     alt: s.querySelector('img')?.alt || ''
   }));
   slides.forEach(slide => {
-    slide.addEventListener('click', () => {
-      const src = slide.dataset.src || slide.querySelector('img')?.src;
-      if (src) openLightbox(src, lbList);
-    });
+    const imgWrap = slide.querySelector('.card-img-wrap');
+    if (imgWrap) {
+      imgWrap.addEventListener('click', () => {
+        const src = slide.dataset.src || slide.querySelector('img')?.src;
+        if (src) openLightbox(src, lbList);
+      });
+      imgWrap.style.cursor = 'zoom-in';
+    }
   });
 
-  /* ── progress bar ── */
   function startBar() {
     if (!bar) return;
     bar.style.transition = 'none';
@@ -245,26 +222,17 @@ function createCardSlider({ trackId, prevId, nextId, dotsId, barId, interval }) 
     });
   }
 
-  function startAuto() {
-    startBar();
-    autoTimer = setInterval(() => { next(); startBar(); }, interval);
-  }
-
+  function startAuto() { startBar(); autoTimer = setInterval(() => { next(); startBar(); }, interval); }
   function resetAuto() {
     clearInterval(autoTimer);
     if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; }
     startAuto();
   }
 
-  /* ── pause on hover ── */
   const container = track.closest('.card-slider');
-  container.addEventListener('mouseenter', () => {
-    clearInterval(autoTimer);
-    if (bar) bar.style.animationPlayState = 'paused';
-  });
+  container.addEventListener('mouseenter', () => clearInterval(autoTimer));
   container.addEventListener('mouseleave', resetAuto);
 
-  /* ── resize: recalc without jumping ── */
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
@@ -280,16 +248,151 @@ function createCardSlider({ trackId, prevId, nextId, dotsId, barId, interval }) 
   startAuto();
 }
 
-// ── INIT SLIDERS ──
-createCardSlider({ trackId:'booksTrack',  prevId:'booksPrev',  nextId:'booksNext',  dotsId:'booksDots',  barId:'booksBar',  interval:3000 });
-createCardSlider({ trackId:'toysTrack',   prevId:'toysPrev',   nextId:'toysNext',   dotsId:'toysDots',   barId:'toysBar',   interval:3000 });
-createCardSlider({ trackId:'chartsTrack', prevId:'chartsPrev', nextId:'chartsNext', dotsId:'chartsDots', barId:'chartsBar', interval:3000 });
+createCardSlider({ trackId:'booksTrack',  prevId:'booksPrev',  nextId:'booksNext',  dotsId:'booksDots',  barId:'booksBar',  interval:3500 });
+createCardSlider({ trackId:'toysTrack',   prevId:'toysPrev',   nextId:'toysNext',   dotsId:'toysDots',   barId:'toysBar',   interval:3500 });
+createCardSlider({ trackId:'chartsTrack', prevId:'chartsPrev', nextId:'chartsNext', dotsId:'chartsDots', barId:'chartsBar', interval:3500 });
 
-// ── CONSULTANCY GALLERY LIGHTBOX ──
+// ── CONSULTANCY LIGHTBOX ──
 const consultImgs = document.querySelectorAll('.consult-gallery img');
 const consultList = Array.from(consultImgs).map(img => ({ src: img.src, alt: img.alt }));
-consultImgs.forEach(img => {
-  img.addEventListener('click', () => openLightbox(img.src, consultList));
+consultImgs.forEach(img => img.addEventListener('click', () => openLightbox(img.src, consultList)));
+
+// ══════════════════════════════════════
+//  ORDER MODAL
+// ══════════════════════════════════════
+const orderOverlay  = document.getElementById('orderOverlay');
+const orderForm     = document.getElementById('orderForm');
+const orderSuccess  = document.getElementById('orderSuccess');
+const qtyInput      = document.getElementById('of-qty');
+
+// Open with product pre-filled
+function openOrder(btn) {
+  const slide = btn.closest('.card-slide');
+  const name  = slide.dataset.name  || '';
+  const cat   = slide.dataset.cat   || '';
+  const desc  = slide.dataset.desc  || '';
+  const src   = slide.dataset.src   || slide.querySelector('img')?.src || '';
+
+  document.getElementById('modalProductImg').src  = src;
+  document.getElementById('modalProductName').textContent = name;
+  document.getElementById('modalProductCat').textContent  = cat;
+  document.getElementById('modalProductDesc').textContent = desc;
+  document.getElementById('of-product').value = name;
+  document.getElementById('of-qty').value = 1;
+
+  // reset form state
+  orderForm.style.display = '';
+  orderSuccess.style.display = 'none';
+  clearErrors();
+
+  orderOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+// Open with blank product (custom order)
+function openCustomOrder() {
+  document.getElementById('modalProductImg').src = 'https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_500/v1685521829/tip%20top%20consultancy/zmyn7wtr7yauhd8f1bow.jpg';
+  document.getElementById('modalProductName').textContent = 'Custom Order';
+  document.getElementById('modalProductCat').textContent  = 'Any Product';
+  document.getElementById('modalProductDesc').textContent = 'Describe any product you want in the form — we\'ll source it and deliver it to you free!';
+  document.getElementById('of-product').value = 'Custom / Not listed';
+  document.getElementById('of-qty').value = 1;
+
+  orderForm.style.display = '';
+  orderSuccess.style.display = 'none';
+  clearErrors();
+
+  orderOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOrder() {
+  orderOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('orderClose').addEventListener('click', closeOrder);
+document.getElementById('successClose').addEventListener('click', closeOrder);
+orderOverlay.addEventListener('click', e => { if (e.target === orderOverlay) closeOrder(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && orderOverlay.classList.contains('active')) closeOrder(); });
+
+// Qty buttons
+document.getElementById('qtyMinus').addEventListener('click', () => {
+  const v = parseInt(qtyInput.value) || 1;
+  if (v > 1) qtyInput.value = v - 1;
+});
+document.getElementById('qtyPlus').addEventListener('click', () => {
+  const v = parseInt(qtyInput.value) || 1;
+  if (v < 99) qtyInput.value = v + 1;
+});
+
+// Validation
+function setError(id, msg) {
+  const el = document.getElementById(id);
+  el.style.borderColor = '#e06520';
+  el.style.background  = '#fff8f5';
+}
+function clearError(id) {
+  const el = document.getElementById(id);
+  el.style.borderColor = '';
+  el.style.background  = '';
+}
+function clearErrors() {
+  ['of-fname','of-lname','of-phone','of-whatsapp','of-country','of-address','of-product'].forEach(clearError);
+}
+
+// Submit → build WhatsApp message and open correct number
+document.getElementById('orderSubmit').addEventListener('click', () => {
+  const fname    = document.getElementById('of-fname').value.trim();
+  const lname    = document.getElementById('of-lname').value.trim();
+  const phone    = document.getElementById('of-phone').value.trim();
+  const whatsapp = document.getElementById('of-whatsapp').value.trim();
+  const country  = document.getElementById('of-country').value;
+  const address  = document.getElementById('of-address').value.trim();
+  const product  = document.getElementById('of-product').value.trim();
+  const qty      = document.getElementById('of-qty').value || '1';
+  const extra    = document.getElementById('of-extra').value.trim();
+
+  clearErrors();
+  let valid = true;
+  if (!fname)    { setError('of-fname', true);    valid = false; }
+  if (!lname)    { setError('of-lname', true);    valid = false; }
+  if (!phone)    { setError('of-phone', true);    valid = false; }
+  if (!whatsapp) { setError('of-whatsapp', true); valid = false; }
+  if (!country)  { setError('of-country', true);  valid = false; }
+  if (!address)  { setError('of-address', true);  valid = false; }
+  if (!product)  { setError('of-product', true);  valid = false; }
+  if (!valid) return;
+
+  // Pick WhatsApp number based on country
+  const waNumber = country === 'Uganda' ? WA_UGANDA : WA_RWANDA;
+
+  // Build the message
+  let msg = `🛒 *NEW ORDER — Tip Top Consultancy*\n\n`;
+  msg += `📦 *Product:* ${product}\n`;
+  msg += `🔢 *Quantity:* ${qty}\n`;
+  msg += `\n👤 *Customer Name:* ${fname} ${lname}\n`;
+  msg += `📞 *Phone:* ${phone}\n`;
+  msg += `💬 *WhatsApp:* ${whatsapp}\n`;
+  msg += `🌍 *Country:* ${country}\n`;
+  msg += `📍 *Delivery Address:* ${address}\n`;
+  if (extra) {
+    msg += `\n📝 *Additional Request:*\n${extra}\n`;
+  }
+  msg += `\n🚚 *Delivery:* FREE\n`;
+  msg += `\n_Sent from tiptop-website.vercel.app_`;
+
+  const encoded = encodeURIComponent(msg);
+  const waURL   = `https://wa.me/${waNumber}?text=${encoded}`;
+
+  // Show success state then open WhatsApp
+  orderForm.style.display = 'none';
+  orderSuccess.style.display = 'flex';
+  orderSuccess.style.flexDirection = 'column';
+
+  setTimeout(() => {
+    window.open(waURL, '_blank');
+  }, 600);
 });
 
 // ── CONTACT FORM ──
@@ -305,16 +408,11 @@ document.querySelector('.btn-form').addEventListener('click', function () {
       inp.style.borderColor = '';
       inp.style.background  = '';
     }
-    
   });
   if (valid) {
     this.textContent = '✓ Message Sent!';
     this.style.background = '#3da668';
     inputs.forEach(inp => inp.value = '');
-    setTimeout(() => {
-      this.textContent = 'Send Message →';
-      this.style.background = '';
-    }, 3000);
+    setTimeout(() => { this.textContent = 'Send Message →'; this.style.background = ''; }, 3000);
   }
-
 });
