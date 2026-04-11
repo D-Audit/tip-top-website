@@ -84,6 +84,7 @@ const lbCounter = document.getElementById('lbCounter');
 let lbImages = [], lbIndex = 0;
 
 function openLightbox(src, imageList) {
+  if (!lightbox || !lbImg || !lbCounter) return;
   lbImages = imageList || [{ src, alt: '' }];
   lbIndex = lbImages.findIndex(img => img.src === src);
   if (lbIndex < 0) lbIndex = 0;
@@ -92,6 +93,7 @@ function openLightbox(src, imageList) {
   document.body.style.overflow = 'hidden';
 }
 function showLbImage(idx) {
+  if (!lbImg || !lbCounter) return;
   if (idx < 0) idx = lbImages.length - 1;
   if (idx >= lbImages.length) idx = 0;
   lbIndex = idx;
@@ -103,16 +105,23 @@ function showLbImage(idx) {
   lbCounter.textContent = (idx + 1) + ' / ' + lbImages.length;
 }
 function closeLightbox() {
+  if (!lightbox || !lbImg) return;
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
   setTimeout(() => { lbImg.src = ''; }, 300);
 }
-document.getElementById('lbClose').addEventListener('click', closeLightbox);
-document.getElementById('lbPrev').addEventListener('click', () => showLbImage(lbIndex - 1));
-document.getElementById('lbNext').addEventListener('click', () => showLbImage(lbIndex + 1));
-lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+const lbClose = document.getElementById('lbClose');
+const lbPrev = document.getElementById('lbPrev');
+const lbNext = document.getElementById('lbNext');
+if (lbClose) lbClose.addEventListener('click', closeLightbox);
+if (lbPrev) lbPrev.addEventListener('click', () => showLbImage(lbIndex - 1));
+if (lbNext) lbNext.addEventListener('click', () => showLbImage(lbIndex + 1));
+if (lightbox) {
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+}
 document.addEventListener('keydown', e => {
-  if (!lightbox.classList.contains('active')) return;
+  if (!lightbox || !lightbox.classList.contains('active')) return;
   if (e.key === 'Escape') closeLightbox();
   if (e.key === 'ArrowLeft') showLbImage(lbIndex - 1);
   if (e.key === 'ArrowRight') showLbImage(lbIndex + 1);
@@ -187,14 +196,12 @@ function createCardSlider({ trackId, prevId, nextId, dotsId, barId, interval }) 
     if (Math.abs(diff) > 44) { diff > 0 ? next() : prev(); resetAuto(); }
   });
 
-  // keyboard
   track.closest('.card-slider').setAttribute('tabindex', '0');
   track.closest('.card-slider').addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft') { prev(); resetAuto(); }
     if (e.key === 'ArrowRight') { next(); resetAuto(); }
   });
 
-  // lightbox on image click (not on button click)
   const lbList = slides.map(s => ({
     src: s.dataset.src || s.querySelector('img')?.src || '',
     alt: s.querySelector('img')?.alt || ''
@@ -265,22 +272,20 @@ const orderForm     = document.getElementById('orderForm');
 const orderSuccess  = document.getElementById('orderSuccess');
 const qtyInput      = document.getElementById('of-qty');
 
-// Open with product pre-filled
 function openOrder(btn) {
   const slide = btn.closest('.card-slide');
-  const name  = slide.dataset.name  || '';
-  const cat   = slide.dataset.cat   || '';
-  const desc  = slide.dataset.desc  || '';
-  const src   = slide.dataset.src   || slide.querySelector('img')?.src || '';
+  const name  = slide?.dataset.name  || '';
+  const cat   = slide?.dataset.cat   || '';
+  const desc  = slide?.dataset.desc  || '';
+  const src   = slide?.dataset.src   || slide?.querySelector('img')?.src || '';
 
   document.getElementById('modalProductImg').src  = src;
   document.getElementById('modalProductName').textContent = name;
   document.getElementById('modalProductCat').textContent  = cat;
   document.getElementById('modalProductDesc').textContent = desc;
   document.getElementById('of-product').value = name;
-  document.getElementById('of-qty').value = 1;
+  qtyInput.value = 1;
 
-  // reset form state
   orderForm.style.display = '';
   orderSuccess.style.display = 'none';
   clearErrors();
@@ -289,14 +294,13 @@ function openOrder(btn) {
   document.body.style.overflow = 'hidden';
 }
 
-// Open with blank product (custom order)
 function openCustomOrder() {
   document.getElementById('modalProductImg').src = 'https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_500/v1685521829/tip%20top%20consultancy/zmyn7wtr7yauhd8f1bow.jpg';
   document.getElementById('modalProductName').textContent = 'Custom Order';
   document.getElementById('modalProductCat').textContent  = 'Any Product';
-  document.getElementById('modalProductDesc').textContent = 'Describe any product you want in the form — we\'ll source it and deliver it to you free!';
+  document.getElementById('modalProductDesc').textContent = 'Describe any product you want in the form — we\'ll source it and deliver it to you!';
   document.getElementById('of-product').value = 'Custom / Not listed';
-  document.getElementById('of-qty').value = 1;
+  qtyInput.value = 1;
 
   orderForm.style.display = '';
   orderSuccess.style.display = 'none';
@@ -311,29 +315,35 @@ function closeOrder() {
   document.body.style.overflow = '';
 }
 
-document.getElementById('orderClose').addEventListener('click', closeOrder);
-document.getElementById('successClose').addEventListener('click', closeOrder);
-orderOverlay.addEventListener('click', e => { if (e.target === orderOverlay) closeOrder(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && orderOverlay.classList.contains('active')) closeOrder(); });
+const orderCloseButton = document.getElementById('orderClose');
+const successCloseButton = document.getElementById('successClose');
+if (orderCloseButton) orderCloseButton.addEventListener('click', closeOrder);
+if (successCloseButton) successCloseButton.addEventListener('click', closeOrder);
+if (orderOverlay) {
+  orderOverlay.addEventListener('click', e => { if (e.target === orderOverlay) closeOrder(); });
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && orderOverlay?.classList.contains('active')) closeOrder(); });
 
-// Qty buttons
-document.getElementById('qtyMinus').addEventListener('click', () => {
+const qtyMinusBtn = document.getElementById('qtyMinus');
+const qtyPlusBtn  = document.getElementById('qtyPlus');
+if (qtyMinusBtn) qtyMinusBtn.addEventListener('click', () => {
   const v = parseInt(qtyInput.value) || 1;
   if (v > 1) qtyInput.value = v - 1;
 });
-document.getElementById('qtyPlus').addEventListener('click', () => {
+if (qtyPlusBtn) qtyPlusBtn.addEventListener('click', () => {
   const v = parseInt(qtyInput.value) || 1;
   if (v < 99) qtyInput.value = v + 1;
 });
 
-// Validation
-function setError(id, msg) {
+function setError(id) {
   const el = document.getElementById(id);
+  if (!el) return;
   el.style.borderColor = '#e06520';
   el.style.background  = '#fff8f5';
 }
 function clearError(id) {
   const el = document.getElementById(id);
+  if (!el) return;
   el.style.borderColor = '';
   el.style.background  = '';
 }
@@ -341,78 +351,77 @@ function clearErrors() {
   ['of-fname','of-lname','of-phone','of-whatsapp','of-country','of-address','of-product'].forEach(clearError);
 }
 
-// Submit → build WhatsApp message and open correct number
-document.getElementById('orderSubmit').addEventListener('click', () => {
-  const fname    = document.getElementById('of-fname').value.trim();
-  const lname    = document.getElementById('of-lname').value.trim();
-  const phone    = document.getElementById('of-phone').value.trim();
-  const whatsapp = document.getElementById('of-whatsapp').value.trim();
-  const country  = document.getElementById('of-country').value;
-  const address  = document.getElementById('of-address').value.trim();
-  const product  = document.getElementById('of-product').value.trim();
-  const qty      = document.getElementById('of-qty').value || '1';
-  const extra    = document.getElementById('of-extra').value.trim();
+const orderSubmitBtn = document.getElementById('orderSubmit');
+if (orderSubmitBtn) {
+  orderSubmitBtn.addEventListener('click', () => {
+    const fname    = document.getElementById('of-fname').value.trim();
+    const lname    = document.getElementById('of-lname').value.trim();
+    const phone    = document.getElementById('of-phone').value.trim();
+    const whatsapp = document.getElementById('of-whatsapp').value.trim();
+    const country  = document.getElementById('of-country').value;
+    const address  = document.getElementById('of-address').value.trim();
+    const product  = document.getElementById('of-product').value.trim();
+    const qty      = document.getElementById('of-qty').value || '1';
+    const extra    = document.getElementById('of-extra').value.trim();
 
-  clearErrors();
-  let valid = true;
-  if (!fname)    { setError('of-fname', true);    valid = false; }
-  if (!lname)    { setError('of-lname', true);    valid = false; }
-  if (!phone)    { setError('of-phone', true);    valid = false; }
-  if (!whatsapp) { setError('of-whatsapp', true); valid = false; }
-  if (!country)  { setError('of-country', true);  valid = false; }
-  if (!address)  { setError('of-address', true);  valid = false; }
-  if (!product)  { setError('of-product', true);  valid = false; }
-  if (!valid) return;
+    clearErrors();
+    let valid = true;
+    if (!fname)    { setError('of-fname');    valid = false; }
+    if (!lname)    { setError('of-lname');    valid = false; }
+    if (!phone)    { setError('of-phone');    valid = false; }
+    if (!whatsapp) { setError('of-whatsapp'); valid = false; }
+    if (!country)  { setError('of-country');  valid = false; }
+    if (!address)  { setError('of-address');  valid = false; }
+    if (!product)  { setError('of-product');  valid = false; }
+    if (!valid) return;
 
-  // Pick WhatsApp number based on country
-  const waNumber = country === 'Uganda' ? WA_UGANDA : WA_RWANDA;
+    const waNumber = country === 'Uganda' ? WA_UGANDA : WA_RWANDA;
+    let msg = `🛒 *NEW ORDER — Tip Top Consultancy*\n\n`;
+    msg += `📦 *Product:* ${product}\n`;
+    msg += `🔢 *Quantity:* ${qty}\n`;
+    msg += `\n👤 *Customer Name:* ${fname} ${lname}\n`;
+    msg += `📞 *Phone:* ${phone}\n`;
+    msg += `💬 *WhatsApp:* ${whatsapp}\n`;
+    msg += `🌍 *Country:* ${country}\n`;
+    msg += `📍 *Delivery Address:* ${address}\n`;
+    if (extra) {
+      msg += `\n📝 *Additional Request:*\n${extra}\n`;
+    }
+    msg += `\n🚚 *Delivery:* FREE\n`;
+    msg += `\n_Sent from tiptop-website.vercel.app_`;
 
-  // Build the message
-  let msg = `🛒 *NEW ORDER — Tip Top Consultancy*\n\n`;
-  msg += `📦 *Product:* ${product}\n`;
-  msg += `🔢 *Quantity:* ${qty}\n`;
-  msg += `\n👤 *Customer Name:* ${fname} ${lname}\n`;
-  msg += `📞 *Phone:* ${phone}\n`;
-  msg += `💬 *WhatsApp:* ${whatsapp}\n`;
-  msg += `🌍 *Country:* ${country}\n`;
-  msg += `📍 *Delivery Address:* ${address}\n`;
-  if (extra) {
-    msg += `\n📝 *Additional Request:*\n${extra}\n`;
-  }
-  msg += `\n🚚 *Delivery:* FREE\n`;
-  msg += `\n_Sent from tiptop-website.vercel.app_`;
+    const encoded = encodeURIComponent(msg);
+    const waURL   = `https://wa.me/${waNumber}?text=${encoded}`;
 
-  const encoded = encodeURIComponent(msg);
-  const waURL   = `https://wa.me/${waNumber}?text=${encoded}`;
+    orderForm.style.display = 'none';
+    orderSuccess.style.display = 'flex';
+    orderSuccess.style.flexDirection = 'column';
 
-  // Show success state then open WhatsApp
-  orderForm.style.display = 'none';
-  orderSuccess.style.display = 'flex';
-  orderSuccess.style.flexDirection = 'column';
-
-  setTimeout(() => {
     window.open(waURL, '_blank');
-  }, 600);
-});
+  });
+}
 
 // ── CONTACT FORM ──
-document.querySelector('.btn-form').addEventListener('click', function () {
-  const inputs = this.closest('.contact-form-card').querySelectorAll('input, textarea');
-  let valid = true;
-  inputs.forEach(inp => {
-    if (!inp.value.trim()) {
-      inp.style.borderColor = '#f5813f';
-      inp.style.background  = 'rgba(245,129,63,.08)';
-      valid = false;
-    } else {
-      inp.style.borderColor = '';
-      inp.style.background  = '';
+const contactButton = document.querySelector('.btn-form');
+if (contactButton) {
+  contactButton.addEventListener('click', function () {
+    const inputs = this.closest('.contact-form-card').querySelectorAll('input, textarea');
+    let valid = true;
+    inputs.forEach(inp => {
+      if (!inp.value.trim()) {
+        inp.style.borderColor = '#f5813f';
+        inp.style.background  = 'rgba(245,129,63,.08)';
+        valid = false;
+      } else {
+        inp.style.borderColor = '';
+        inp.style.background  = '';
+      }
+    });
+    if (valid) {
+      this.textContent = '✓ Message Sent!';
+      this.style.background = '#3da668';
+      inputs.forEach(inp => inp.value = '');
+      setTimeout(() => { this.textContent = 'Send Message →'; this.style.background = ''; }, 3000);
     }
   });
-  if (valid) {
-    this.textContent = '✓ Message Sent!';
-    this.style.background = '#3da668';
-    inputs.forEach(inp => inp.value = '');
-    setTimeout(() => { this.textContent = 'Send Message →'; this.style.background = ''; }, 3000);
-  }
-});
+}

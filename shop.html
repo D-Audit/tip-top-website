@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shop - Tip Top Consultancy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ORDER MODAL -->
+<div class="order-overlay" id="orderOverlay">
+  <div class="order-modal" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="order-modal-close" id="orderClose" aria-label="Close">✕</button>
+    <div class="order-modal-inner">
+      <div class="order-preview">
+        <div class="order-preview-img-wrap">
+          <img id="modalProductImg" src="" alt=""/>
+        </div>
+        <div class="order-preview-info">
+          <span class="order-preview-cat" id="modalProductCat"></span>
+          <h3 id="modalProductName"></h3>
+          <p id="modalProductDesc"></p>
+        </div>
+        <div class="order-trust-row">
+          <div class="order-trust-item"><span>✅</span><span>Delivery</span></div>
+          <div class="order-trust-item"><span>📦</span><span>Fast Dispatch</span></div>
+          <div class="order-trust-item"><span>💬</span><span>WhatsApp Support</span></div>
+        </div>
+      </div>
+      <div class="order-form-side">
+        <div class="order-form-header">
+          <div class="order-form-icon">🛒</div>
+          <div>
+            <h2 id="modalTitle">Place Your Order</h2>
+            <p>Fill in your details — we deliver to you free!</p>
+          </div>
+        </div>
+        <div class="order-form" id="orderForm">
+          <div class="of-row">
+            <div class="of-group">
+              <label>First Name <span class="req">*</span></label>
+              <input type="text" id="of-fname" placeholder="e.g. Jean Paul"/>
+            </div>
+            <div class="of-group">
+              <label>Last Name <span class="req">*</span></label>
+              <input type="text" id="of-lname" placeholder="e.g. Mugisha"/>
+            </div>
+          </div>
+          <div class="of-group">
+            <label>Phone Number <span class="req">*</span></label>
+            <input type="tel" id="of-phone" placeholder="+250 7XX XXX XXX"/>
+          </div>
+          <div class="of-group">
+            <label>WhatsApp Number <span class="req">*</span></label>
+            <input type="tel" id="of-whatsapp" placeholder="Same as phone or different WhatsApp number"/>
+          </div>
+          <div class="of-group">
+            <label>Country <span class="req">*</span></label>
+            <select id="of-country">
+              <option value="">— Select your country —</option>
+              <option value="Rwanda">🇷🇼 Rwanda</option>
+              <option value="Uganda">🇺🇬 Uganda</option>
+              <option value="Other">🌍 Other (East Africa)</option>
+            </select>
+          </div>
+          <div class="of-group">
+            <label>Delivery Address <span class="req">*</span></label>
+            <input type="text" id="of-address" placeholder="e.g. Kimironko, Kigali / Kampala Road, Entebbe"/>
+          </div>
+          <div class="of-row">
+            <div class="of-group">
+              <label>Product <span class="req">*</span></label>
+              <input type="text" id="of-product" readonly/>
+            </div>
+            <div class="of-group">
+              <label>Quantity <span class="req">*</span></label>
+              <div class="qty-wrap">
+                <button type="button" class="qty-btn" id="qtyMinus">−</button>
+                <input type="number" id="of-qty" value="1" min="1" max="99"/>
+                <button type="button" class="qty-btn" id="qtyPlus">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="of-group">
+            <label>Additional Products / Special Request</label>
+            <textarea id="of-extra" placeholder="Don't see what you need? Describe any other product you want here — we'll do our best to source it for you!"></textarea>
+          </div>
+          <button class="btn-order-submit" id="orderSubmit">
+            <span class="btn-order-icon">📲</span>
+            <span>Send Order via WhatsApp</span>
+            <span class="btn-order-arrow">→</span>
+          </button>
+          <p class="order-note">WhatsApp will open with your order already written. Just tap <strong>Send</strong> and we'll confirm your delivery.</p>
+        </div>
+        <div class="order-success" id="orderSuccess" style="display:none">
+          <div class="success-icon">🎉</div>
+          <h3>Order Sent!</h3>
+          <p>Your order has been sent via WhatsApp. We will confirm your delivery shortly.</p>
+          <p class="success-sub">Thank you for choosing Tip Top Consultancy!</p>
+          <button class="btn-success-close" id="successClose">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo-wrap">
+      <img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_84/v1685521829/tip%20top%20consultancy/zmyn7wtr7yauhd8f1bow.jpg" alt="Logo" width="42" height="42"/>
+    </div>
+    <div>
+      <div class="nav-brand-name">Tip Top Consultancy</div>
+      <span class="nav-brand-sub">Empowering Children's Futures</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="#shop">Buy Online</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="index.html#services">Our Services</a>
+  <a href="#shop">All Products</a>
+  <a href="index.html#contact">Contact Us</a>
+</div>
+
+<!-- HERO BANNER -->
+<section style="min-height:40vh;background:linear-gradient(148deg,var(--gd) 0%,var(--gm) 58%,#286045 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:100px 5% 48px">
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 72% 38%,rgba(245,129,63,.12) 0%,transparent 52%),radial-gradient(circle at 18% 72%,rgba(61,166,104,.18) 0%,transparent 46%);pointer-events:none"></div>
+  <div style="position:relative;z-index:1;text-align:center;color:#fff">
+    <h1 style="font-family:var(--fd);font-size:clamp(2.4rem,5vw,3.6rem);font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:-.01em">All Products in One Place</h1>
+    <p style="font-size:1rem;color:rgba(255,255,255,.75);max-width:480px;line-height:1.75;margin:0 auto">Browse our complete collection of educational books, learning toys, and flashcards. Order online!</p>
+  </div>
+</section>
+
+<!-- DELIVERY BANNER -->
+<div class="delivery-banner">
+  <div class="delivery-banner-inner rv up">
+    <div class="db-item"><span class="db-icon">📲</span><div><strong>Order via WhatsApp</strong><span>Instant confirmation</span></div></div>
+    <div class="db-divider"></div>
+    <div class="db-item"><span class="db-icon">📦</span><div><strong>All Products</strong><span>Toys, Books, Charts, Consultancy</span></div></div>
+    <div class="db-divider"></div>
+    <div class="db-item"><span class="db-icon">✅</span><div><strong>Custom Orders</strong><span>Describe what you need</span></div></div>
+  </div>
+</div>
+
+<!-- ALL PRODUCTS SECTION -->
+<section id="shop" style="padding:64px 5%;background:var(--cream)">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:48px">
+      <h2 style="font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;color:var(--gd);margin-bottom:12px">Browse All Products</h2>
+      <p style="font-size:.95rem;color:var(--ts);max-width:560px;margin:0 auto;line-height:1.75">Educational books, learning toys, wall charts, and flashcards — everything aligned with ECD curriculum and designed for childhood development.</p>
+    </div>
+
+    <!-- BOOKS SECTION -->
+    <div style="margin-bottom:64px">
+      <div style="margin-bottom:28px">
+        <h3 style="font-family:var(--fd);font-size:1.8rem;font-weight:700;color:var(--gd);margin-bottom:8px">📚 Educational Books</h3>
+        <p style="font-size:.9rem;color:var(--ts)">Child-friendly books and readers aligned with ECD syllabus.</p>
+      </div>
+      <div class="card-slider" id="booksSlider">
+        <div class="card-slider-viewport">
+          <div class="card-slider-track" id="booksTrack">
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685181320/tip%20top%20consultancy/books/rvys1wx2kkfhpd4tkihe.png" data-name="Workbook Series" data-cat="Educational Books" data-desc="A comprehensive workbook series aligned with ECD and pre-school syllabi. Covers cognitive development, health activities, and social skills for young learners.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685181320/tip%20top%20consultancy/books/rvys1wx2kkfhpd4tkihe.png" alt="Workbook Series" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">01</span><h4>Workbook Series</h4><span class="card-tag">ECD · Cognitive Skills</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685181319/tip%20top%20consultancy/books/ftvb6mp5kpweg12ryky6.png" data-name="Reader Series" data-cat="Educational Books" data-desc="Engaging reader books that build literacy skills step by step. Designed for early childhood with colourful illustrations and simple language.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685181319/tip%20top%20consultancy/books/ftvb6mp5kpweg12ryky6.png" alt="Reader Series" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">02</span><h4>Reader Series</h4><span class="card-tag">ECD · Literacy</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685181319/tip%20top%20consultancy/books/dbvgu6tjw8wcuavwlauq.png" data-name="Activity Book" data-cat="Educational Books" data-desc="Fun activity books that develop fine motor skills through drawing, tracing, and colouring. Perfect for pre-school children aged 3–6.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685181319/tip%20top%20consultancy/books/dbvgu6tjw8wcuavwlauq.png" alt="Activity Book" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">03</span><h4>Activity Book</h4><span class="card-tag">Pre-school · Motor Skills</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685181318/tip%20top%20consultancy/books/rcb2ph1xemdfa4cb8fve.png" data-name="Health &amp; Wellness Book" data-cat="Educational Books" data-desc="Teaches children about personal hygiene, healthy habits, emotions, and social skills in an age-appropriate, engaging way.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685181318/tip%20top%20consultancy/books/rcb2ph1xemdfa4cb8fve.png" alt="Health &amp; Wellness" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">04</span><h4>Health &amp; Wellness</h4><span class="card-tag">ECD · Social Skills</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685181318/tip%20top%20consultancy/books/u1to9rslqr6dfrheoatk.png" data-name="Numeracy Book" data-cat="Educational Books" data-desc="Makes numbers fun! Covers counting, basic arithmetic, shapes, and patterns for early childhood learners aligned with ECD mathematics curriculum.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685181318/tip%20top%20consultancy/books/u1to9rslqr6dfrheoatk.png" alt="Numeracy Book" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">05</span><h4>Numeracy Book</h4><span class="card-tag">ECD · Mathematics</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685181319/tip%20top%20consultancy/books/cdmie2urpyzjh9b4lblq.png" data-name="Language Arts Book" data-cat="Educational Books" data-desc="Develops language skills including reading, writing, speaking, and listening. Builds vocabulary and expression for early learners.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685181319/tip%20top%20consultancy/books/cdmie2urpyzjh9b4lblq.png" alt="Language Arts" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">06</span><h4>Language Arts</h4><span class="card-tag">ECD · Language</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685181318/tip%20top%20consultancy/books/c7e9fm8v5jlr22kbdmjp.png" data-name="Science Book" data-cat="Educational Books" data-desc="Introduces young children to nature, animals, weather, and the human body through fun activities and colourful illustrations.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685181318/tip%20top%20consultancy/books/c7e9fm8v5jlr22kbdmjp.png" alt="Science Book" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">07</span><h4>Science Book</h4><span class="card-tag">Pre-school · Science</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+          </div>
+        </div>
+        <button class="cs-btn cs-prev" id="booksPrev" aria-label="Previous">&#8249;</button>
+        <button class="cs-btn cs-next" id="booksNext" aria-label="Next">&#8250;</button>
+        <div class="cs-footer"><div class="cs-dots" id="booksDots"></div><div class="cs-progress"><div class="cs-bar" id="booksBar"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TOYS SECTION -->
+    <div style="margin-bottom:64px">
+      <div style="margin-bottom:28px">
+        <h3 style="font-family:var(--fd);font-size:1.8rem;font-weight:700;color:var(--gd);margin-bottom:8px">🧸 Learning Toys</h3>
+        <p style="font-size:.9rem;color:var(--ts)">Stimulating cognitive and emotional growth through play.</p>
+      </div>
+      <div class="card-slider" id="toysSlider">
+        <div class="card-slider-viewport">
+          <div class="card-slider-track" id="toysTrack">
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685186676/tip%20top%20consultancy/toys/t78ldaralz1fa2epsjgy.jpg" data-name="Discovery Toys" data-cat="Learning Toys" data-desc="Hands-on discovery toys that spark curiosity and exploration. Encourages asking questions and learning about the world.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685186676/tip%20top%20consultancy/toys/t78ldaralz1fa2epsjgy.jpg" alt="Discovery Toys" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">01</span><h4>Discovery Toys</h4><span class="card-tag">Curiosity</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685186676/tip%20top%20consultancy/toys/qyn3mf5iutez472ssaeo.jpg" data-name="Motor Skills Kit" data-cat="Learning Toys" data-desc="A carefully curated kit of toys designed to develop fine and gross motor skills. Ideal for home and classroom use.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685186676/tip%20top%20consultancy/toys/qyn3mf5iutez472ssaeo.jpg" alt="Motor Skills Kit" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">02</span><h4>Motor Skills Kit</h4><span class="card-tag">Development</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685186677/tip%20top%20consultancy/toys/e4f0pzl16awjnawbuwhh.jpg" data-name="Puzzle Sets" data-cat="Learning Toys" data-desc="Puzzle sets that build problem-solving, spatial awareness, and patience. Available in different levels.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685186677/tip%20top%20consultancy/toys/e4f0pzl16awjnawbuwhh.jpg" alt="Puzzle Sets" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">03</span><h4>Puzzle Sets</h4><span class="card-tag">Problem Solving</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685186676/tip%20top%20consultancy/toys/eayu9dyz5bhxuddlw5vg.jpg" data-name="Creative Play Set" data-cat="Learning Toys" data-desc="Unleashes creativity and self-expression through art, craft, and role-play materials.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685186676/tip%20top%20consultancy/toys/eayu9dyz5bhxuddlw5vg.jpg" alt="Creative Play" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">04</span><h4>Creative Play Set</h4><span class="card-tag">Expression</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685186676/tip%20top%20consultancy/toys/klt6dzpdlar62vd44tw8.jpg" data-name="Block Sets" data-cat="Learning Toys" data-desc="Colourful building blocks that teach shapes, colours, counting, and spatial thinking. Durable and safe for young learners.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685186676/tip%20top%20consultancy/toys/klt6dzpdlar62vd44tw8.jpg" alt="Block Sets" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">05</span><h4>Block Sets</h4><span class="card-tag">Building</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685186679/tip%20top%20consultancy/toys/oq2hvmbma0qsqq9yi3mq.jpg" data-name="Role Play Kit" data-cat="Learning Toys" data-desc="Encourages social development and empathy through imaginative role play.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685186679/tip%20top%20consultancy/toys/oq2hvmbma0qsqq9yi3mq.jpg" alt="Role Play Kit" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">06</span><h4>Role Play Kit</h4><span class="card-tag">Social Skills</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685186676/tip%20top%20consultancy/toys/iqakmn9gwlryi7khbqgx.jpg" data-name="Sensory Kit" data-cat="Learning Toys" data-desc="Sensory play materials that stimulate touch, sight, and sound. Ideal for early development stages.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685186676/tip%20top%20consultancy/toys/iqakmn9gwlryi7khbqgx.jpg" alt="Sensory Kit" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">07</span><h4>Sensory Kit</h4><span class="card-tag">Senses</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685186676/tip%20top%20consultancy/toys/iph239e4ijt4j4gv5qvb.jpg" data-name="Art &amp; Craft Set" data-cat="Learning Toys" data-desc="A complete art and craft kit that develops creativity, patience, and fine motor skills. Safe, washable materials.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685186676/tip%20top%20consultancy/toys/iph239e4ijt4j4gv5qvb.jpg" alt="Art &amp; Craft" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">08</span><h4>Art &amp; Craft Set</h4><span class="card-tag">Creativity</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+          </div>
+        </div>
+        <button class="cs-btn cs-prev" id="toysPrev" aria-label="Previous">&#8249;</button>
+        <button class="cs-btn cs-next" id="toysNext" aria-label="Next">&#8250;</button>
+        <div class="cs-footer"><div class="cs-dots" id="toysDots"></div><div class="cs-progress"><div class="cs-bar" id="toysBar"></div></div></div>
+      </div>
+    </div>
+
+    <!-- CHARTS SECTION -->
+    <div style="margin-bottom:32px">
+      <div style="margin-bottom:28px">
+        <h3 style="font-family:var(--fd);font-size:1.8rem;font-weight:700;color:var(--gd);margin-bottom:8px">🗂️ Charts &amp; Flashcards</h3>
+        <p style="font-size:.9rem;color:var(--ts)">Colorful, memory-boosting visual learning tools.</p>
+      </div>
+      <div class="card-slider" id="chartsSlider">
+        <div class="card-slider-viewport">
+          <div class="card-slider-track" id="chartsTrack">
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685442504/tip%20top%20consultancy/charts/okpsomvbtfusxukiizua.jpg" data-name="Alphabet Wall Chart" data-cat="Charts &amp; Flashcards" data-desc="A large, colourful alphabet wall chart for classrooms and homes. Helps children learn letters and phonics through vibrant illustrations.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685442504/tip%20top%20consultancy/charts/okpsomvbtfusxukiizua.jpg" alt="Alphabet Chart" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">01</span><h4>Alphabet Wall Chart</h4><span class="card-tag">Wall · Classroom</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685442503/tip%20top%20consultancy/charts/u3pxexlhciuws4bl4w8l.jpg" data-name="Vocabulary Flashcard Set" data-cat="Charts &amp; Flashcards" data-desc="A rich set of vocabulary flashcards covering everyday objects, animals, food, and more. Perfect for building early language skills.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685442503/tip%20top%20consultancy/charts/u3pxexlhciuws4bl4w8l.jpg" alt="Flashcard Set" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">02</span><h4>Vocabulary Flashcards</h4><span class="card-tag">Vocabulary · Memory</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685442504/tip%20top%20consultancy/charts/iru7ewnnvvnciymkwz6z.jpg" data-name="Number Wall Chart" data-cat="Charts &amp; Flashcards" data-desc="A vibrant number chart for classroom walls. Makes counting and number recognition fun and visual for young learners.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685442504/tip%20top%20consultancy/charts/iru7ewnnvvnciymkwz6z.jpg" alt="Number Chart" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">03</span><h4>Number Wall Chart</h4><span class="card-tag">Wall · Numeracy</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685442504/tip%20top%20consultancy/charts/pp3efjq7jmvoyrxfupqv.jpg" data-name="Science Wall Chart" data-cat="Charts &amp; Flashcards" data-desc="Introduces science topics — human body, plants, animals, solar system — through eye-catching wall charts.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685442504/tip%20top%20consultancy/charts/pp3efjq7jmvoyrxfupqv.jpg" alt="Science Chart" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">04</span><h4>Science Wall Chart</h4><span class="card-tag">Wall · Knowledge</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+            <div class="card-slide" data-src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_800/v1685442503/tip%20top%20consultancy/charts/tj3cdqve1zeechfe2h3e.jpg" data-name="Flashcard Collection" data-cat="Charts &amp; Flashcards" data-desc="A complete collection of flashcards covering letters, numbers, shapes, colours, and more. A must-have for every classroom.">
+              <div class="card-img-wrap"><img src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_600/v1685442503/tip%20top%20consultancy/charts/tj3cdqve1zeechfe2h3e.jpg" alt="Flashcard Collection" loading="lazy"/></div>
+              <div class="card-info"><span class="card-num">05</span><h4>Flashcard Collection</h4><span class="card-tag">Classroom · Learning</span><button class="card-order-btn" onclick="openOrder(this)">🛒 Order</button></div>
+            </div>
+          </div>
+        </div>
+        <button class="cs-btn cs-prev" id="chartsPrev" aria-label="Previous">&#8249;</button>
+        <button class="cs-btn cs-next" id="chartsNext" aria-label="Next">&#8250;</button>
+        <div class="cs-footer"><div class="cs-dots" id="chartsDots"></div><div class="cs-progress"><div class="cs-bar" id="chartsBar"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOM ORDER CTA -->
+<section class="custom-order-cta">
+  <div class="custom-order-inner rv up">
+    <div class="custom-order-text">
+      <div class="tag" style="background:rgba(245,129,63,.13);border-color:rgba(245,129,63,.3);color:var(--ob)">Can't find what you need?</div>
+      <h2>Order Any Product You Want</h2>
+      <p>Don't see exactly what you're looking for? Tell us what you need and we'll source it for you — any curriculum book, toy, or chart. We're here to help.</p>
+    </div>
+    <button class="btn-custom-order" onclick="openCustomOrder()">
+      <span>📝</span><span>Place a Custom Order</span><span class="btn-arrow">→</span>
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <img class="footer-logo" src="https://res.cloudinary.com/nrob/image/upload/f_auto,q_auto,w_100/v1685521829/tip%20top%20consultancy/zmyn7wtr7yauhd8f1bow.jpg" alt="Tip Top Consultancy" width="50" height="50" loading="lazy"/>
+        <div class="footer-brand-name">Tip Top Consultancy</div>
+        <p class="footer-brand-desc">Empowering children through quality educational products, learning tools, and expert consultancy services.</p>
+        <div class="social-links-footer">
+          <a href="https://web.facebook.com/profile.php?id=61574305661371" class="social-link-footer" target="_blank" rel="noopener"><svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg><span>Facebook</span></a>
+          <a href="https://www.youtube.com/@tiptopbooks1400" class="social-link-footer" target="_blank" rel="noopener"><svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg><span>YouTube</span></a>
+          <a href="mailto:tiptopconsultancy2@gmail.com" class="social-link-footer"><svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Email Us</span></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="index.html#services">Services</a></li><li><a href="#shop">Buy Online</a></li><li><a href="index.html#contact">Contact Us</a></li></ul></div>
+      <div class="footer-col"><h4>Products</h4><ul><li><a href="#shop">All Products</a></li><li><a href="#shop">Learning Toys</a></li><li><a href="#shop">Learning Books</a></li><li><a href="#shop">Charts &amp; Flashcards</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item"><strong>Rwanda</strong><span>+250 785 486 343<br/>+250 788 252 005</span></div>
+        <div class="footer-contact-item"><strong>Uganda</strong><span>+256 706 438 476</span></div>
+        <div class="footer-contact-item"><strong>Email</strong><span>tiptopconsultancy2@gmail.com</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Tip Top Consultancy. All rights reserved.</p>
+      <p class="footer-copy">Empowering children's futures across the world 🌍</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
